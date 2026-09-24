@@ -3,7 +3,7 @@ title: "I'm earning way less than my peers. But that's okay"
 meta_title: "Earning Less Than My Peers — And I'm Okay With It"
 description: "I left a stable 8-year career on a whim, took a pay cut, and still haven't caught up to my peers. Here's why I'm choosing peace of mind over the race."
 date: 2026-09-28T05:00:00Z
-image: "/public/images/posts/EarningLess/miguel-bruna-TzVN0xQhWaQ-unsplash.jpg"
+image: "/images/posts/EarningLess/miguel-bruna-TzVN0xQhWaQ-unsplash.jpg"
 image_css_style: "object-position: center 85%;"
 categories: ["Money"]
 tags: ["money", "career", "mindset", "singapore"]

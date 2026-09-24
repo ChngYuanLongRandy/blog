@@ -3,7 +3,7 @@ title: Podcast reflections 1
 meta_title: "Finding Partners, Mentors, and Why Books Still Count"
 description: "Iron sharpens iron — but a true peer is rare. Why a mentor, or even a good book, can do the same work as a hard-to-find partner."
 date: 2023-06-29T06:00:00+00:00
-image: "/public/images/posts/Podcast/StockSnap_H8UBNZ7GK1.jpg"
+image: "/images/posts/Podcast/StockSnap_H8UBNZ7GK1.jpg"
 categories: ["Growth"]
 tags: ["personal growth", "mentorship", "reading", "podcasts"]
 draft: false

@@ -3,7 +3,7 @@ title: "5 lessons I have learnt after switching my career"
 meta_title: "5 Lessons From Switching My Career Mid-Life — What I Wish I Knew"
 description: "From building a real emergency fund to staying humble in a new role — five hard-earned lessons from someone who left a stable career to start over in AI and software."
 date: 2023-05-19T05:00:00Z
-image: "/public/images/posts/LessonsLearntCareerSwitch/StockSnap_NQM06PKTKW.jpg"
+image: "/images/posts/LessonsLearntCareerSwitch/StockSnap_NQM06PKTKW.jpg"
 categories: ["Growth"]
 tags: ["career change", "career switch", "personal growth", "AI"]
 draft: false
@@ -16,7 +16,7 @@ I realise that I am in a privileged position to switch my career because I want 
 But having made the switch, these are lessons that I have learnt.
 
 ## 1. Having a (sufficient) emergency fund is incredibly important
-![Piggy bank](/public/images/posts/LessonsLearntCareerSwitch/andre-taissin-piggybank-unsplash.jpg)
+![Piggy bank](/images/posts/LessonsLearntCareerSwitch/andre-taissin-piggybank-unsplash.jpg)
 
 Yes. Having an emergency fund is absolutely crucial and is something that I neglected when making the switch. While having an emergency fund is essential, you also need to calculate the amount that you need on your quest to upgrade yourself to get a job in your new career.
 
@@ -29,7 +29,7 @@ Building up a substantial emergency fund also allows one enough buffer time to g
 And this is if everything works out according to plan…
 
 ## 2. Have a PACE plan for your goals
-![Planning for goals](/public/images/posts/LessonsLearntCareerSwitch/glenn-carstens-peters-RLw-planningunsplash.jpg)
+![Planning for goals](/images/posts/LessonsLearntCareerSwitch/glenn-carstens-peters-RLw-planningunsplash.jpg)
 
 Your plans may not turn out exactly the way you wanted it to be.
 
@@ -51,7 +51,7 @@ This is similar to the [PACE](https://www.ipinternational.net/what-is-a-pace-com
 Once you have gotten the job, expect things to get harder…
 
 ## 3.Always be humble in your dealings
-![Standing in awe of nature](/public/images/posts/LessonsLearntCareerSwitch/kyle-johnson-Aq7id0ZjEW4-unsplash.jpg)
+![Standing in awe of nature](/images/posts/LessonsLearntCareerSwitch/kyle-johnson-Aq7id0ZjEW4-unsplash.jpg)
 Depending on how you made the switch, you may or may not start out from the bottom. But I think it is still wise to be humble no matter your station in life or your position in the company.
 
 Typically, as it is with me, mid career switchers will be older than their peers who are in the same role. Knowing that I have more working experience I tend to be more arrogant and less keen on hearing their opinions. This is especially so if they are treading on familiar grounds that you have been through before.
@@ -65,7 +65,7 @@ I recall my ex boss saying that everyone has something to offer from their lives
 Which brings us to the next point…
 
 ## 4.Be eager to learn (within your craft and beyond)
-![Be eager to learn](/public/images/posts/LessonsLearntCareerSwitch/tim-mossholder-learn-unsplash.jpg)
+![Be eager to learn](/images/posts/LessonsLearntCareerSwitch/tim-mossholder-learn-unsplash.jpg)
 
 Life long learning should not be just a slogan for NTUC or the government but it should be something that we constantly practice.
 
@@ -91,7 +91,7 @@ In the now famous commencement address by Steve Jobs, he spoke of learning calli
 While I was in the course I also learnt about MLOps especially about Kubernetes. I was so intrigued about the subject that I just wanted to learn as much as I can about it, eventually culminating in a certification for it – [CKA](https://www.cncf.io/training/certification/cka/). Part of the mystic is the name. I mean kubernetes? Which I learnt stands for the helmsman or the pilot in greek (cool factor +1). This also helped in my understanding in software concepts like the microservice architecture and many other associated concepts.
 
 ## 5.Put things into perspective when facing hardships
-![Putting into perspective](/public/images/posts/LessonsLearntCareerSwitch/nathan-dumlao-VJHb4QPBgV4-unsplash.jpg)
+![Putting into perspective](/images/posts/LessonsLearntCareerSwitch/nathan-dumlao-VJHb4QPBgV4-unsplash.jpg)
 
 Sometimes we need to remember why are we switching careers to begin with. Is it because of money? Is it because of boredom? Is it because of a lack of career progression? This I believe will set up a good frame of mind when looking for the next career. Knowing what is your priority.
 

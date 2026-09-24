@@ -3,7 +3,7 @@ title: Why you are lucky to be here
 meta_title: "Why You're Lucky to Be Here — The Odds of Your Own Existence"
 description: "From dating app odds to sperm counts and microplastics — a look at just how improbable it was that you exist at all, and why that's worth sitting with."
 date: 2023-05-25T05:00:00Z
-image: "/public/images/posts/WhyYouAreLuckyToBeHere/aaron-lefler-Vs6ip7fsld8-unsplash.jpg"
+image: "/images/posts/WhyYouAreLuckyToBeHere/aaron-lefler-Vs6ip7fsld8-unsplash.jpg"
 categories: ["life"]
 tags: ["gratitude", "relationships", "singapore", "science"]
 draft: false
@@ -26,7 +26,7 @@ Not so easy.
 
 Tall. Dark. Handsome. A simple criteria for my boyfriend. A list like that may exist for you and it could have criteria made up from childhood fantasy, teenage delusion and maybe a little bit of adult hopeful optimism.
 
-![handsome man here](/public/images/posts/WhyYouAreLuckyToBeHere/samuel-raita-RiDxDgHg7pw-unsplash.jpg)
+![handsome man here](/images/posts/WhyYouAreLuckyToBeHere/samuel-raita-RiDxDgHg7pw-unsplash.jpg)
 *I'm an 8, so I'll settle for a 10 or maybe a 9.*
 
 Lets say your criteria for a spouse is this

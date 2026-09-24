@@ -3,7 +3,7 @@ title: "Life is too short to run on automatic"
 meta_title: "Your Bucket List Is Waiting — Start Now"
 description: "A Mark Twain quote, a bucket list you keep postponing, and a nudge to stop waiting for 'someday' — because life moves faster than you think."
 date: 2023-07-26T16:56:47+06:00
-image: "/public/images/posts/LifeIsTooShortToRunOnAutomatic/motiviation-action.png"
+image: "/images/posts/LifeIsTooShortToRunOnAutomatic/motiviation-action.png"
 image_css_style: "transform-origin: 50% 30%; transform: scale(2);"
 categories: ["Growth"]
 tags: ["motivation", "bucket list", "personal growth"]
