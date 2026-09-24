@@ -7,8 +7,8 @@
     "favicon": "/images/favicon.png",
     "logo": "/images/logo.png",
     "logo_width": "200",
-    "logo_height": "34",
-    "logo_text": "Bookworm Light"
+    "logo_height": "200",
+    "logo_text": "Randy Chng"
   },
 
   "settings": {
@@ -33,7 +33,7 @@
 
   "contactinfo": {
     "address": "355 S Grand Ave <br/> Los Angeles, CA 90071",
-    "email": "info@bookworm.org",
-    "phone": "+800 567 1234"
+    "email": "chngyuanlong@gmail.com",
+    "phone": "+65 9231 3901"
   }
 }

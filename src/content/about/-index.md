@@ -1,5 +1,5 @@
 ---
-title: "I’m John Doe, A content writer based in LDN, Currently at Bookworm"
+title: "Hello. I'm Randy. An ordinary Singaporean Dad trying to make sense of the world I am in"
 meta_title: "About"
 image: "/images/author.png"
 draft: false
@@ -7,17 +7,15 @@ draft: false
 what_i_do:
   title: "What I Do"
   items:
-  - title: "Content Writing"
-    description: "Purus eget ipsum elementum venenatis, quis rutrum mi semper nonpurus eget ipsum elementum venenatis."
+  - title: "Doing Dad Stuff"
+    description: "Taking my kids out to play, washing their butts and making sure they are kept out of trouble."
   
-  - title: "Photography"
-    description: "Aenean maximus urna magna elementum, quis rutrum mi semper non purus eget ipsum venenatis."
+  - title: "Writing"
+    description: "That's what I'm doing at my blog."
   
-  - title: "Web Research"
-    description: "Aenean maximus urna magna elementum venenatis, quis semper non purus eget ipsum venenatis."
+  - title: "Odd Jobs"
+    description: "I sort recyclables. I tidy up my home and I run errands."
 
 ---
 
-A content writer with over 12 years experience working across brand identity, publishing and digital products. Maecenas sit amet purus eget ipsum elementum venenatis. Aenean maximus urna magna elementum venenatis quis non purus.
-
-Purus eget ipsum elementum venenatis. Aenean maximus urna magna elementum venenatis, quis rutrum mi semper non purus eget ipsum elementum venenatis, aenean maximus urna magna elementum.
+Middle aged man who is trying to wrestle against the tide of technology by doing things himself (for the most part). Can be found shouting at tides at east coast beach.

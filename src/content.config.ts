@@ -65,6 +65,12 @@ const postsCollection = defineCollection({
     description: z.string().optional(),
     date: z.coerce.date().optional(),
     image: z.string().optional(),
+    // Escape hatches for per-post cover image tweaks (crop position, zoom,
+    // filters, etc) without needing a dedicated schema field for each case.
+    // image_tailwind_class: extra Tailwind classes appended to the <img>.
+    // image_css_style: raw CSS appended to the <img>'s inline style attribute.
+    image_tailwind_class: z.string().optional(),
+    image_css_style: z.string().optional(),
     categories: z.array(z.string()).default(() => ["others"]),
     authors: z.array(z.string()).default(() => ["Admin"]),
     tags: z.array(z.string()).default(() => ["others"]),
