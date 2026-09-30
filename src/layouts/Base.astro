@@ -32,6 +32,18 @@ const { title, meta_title, description, image, noindex, canonical } =
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- dark mode: applied before paint (and re-applied after every
+         ClientRouter transition, since navigation can reset the class) -->
+    <script is:inline>
+      (function () {
+        function applyTheme() {
+          var stored = localStorage.getItem("theme");
+          document.documentElement.classList.toggle("dark", stored !== "light");
+        }
+        applyTheme();
+        document.addEventListener("astro:after-swap", applyTheme);
+      })();
+    </script>
     <!-- favicon -->
     <link rel="shortcut icon" href={config.site.favicon} />
     <!-- theme meta -->

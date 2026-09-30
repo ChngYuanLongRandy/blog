@@ -18,17 +18,20 @@ const defaultColorGroups = [
   { colors: themeConfig.colors.default.theme_color, prefix: "" },
   { colors: themeConfig.colors.default.text_color, prefix: "" },
 ];
+// Dark mode vars reuse the same CSS variable names as the default palette
+// (e.g. --color-body), so overriding them under .dark actually changes what
+// every existing bg-body/text-dark/etc utility resolves to.
 const darkColorGroups = [];
 if (themeConfig.colors.darkmode?.theme_color) {
   darkColorGroups.push({
     colors: themeConfig.colors.darkmode.theme_color,
-    prefix: "darkmode-",
+    prefix: "",
   });
 }
 if (themeConfig.colors.darkmode?.text_color) {
   darkColorGroups.push({
     colors: themeConfig.colors.darkmode.text_color,
-    prefix: "darkmode-",
+    prefix: "",
   });
 }
 
@@ -72,9 +75,11 @@ Object.entries(fontFamilies).forEach(([key, font]) => {
 
 const baseVars = { ...fontVars, ...defaultVars };
 
-// Build a colorsMap including both sets
+// Utility classnames (bg-body, text-text-dark, etc) all come from the
+// default group's keys; dark mode swaps what the underlying var resolves
+// to, it doesn't need its own set of classnames.
 const colorsMap = {};
-[...defaultColorGroups, ...darkColorGroups].forEach(({ colors, prefix }) => {
+defaultColorGroups.forEach(({ colors, prefix }) => {
   Object.entries(colors).forEach(([key]) => {
     const cssKey = key.replace(/_/g, "-");
     colorsMap[prefix + cssKey] = `var(--color-${prefix}${cssKey})`;

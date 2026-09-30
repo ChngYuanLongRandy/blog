@@ -114,3 +114,16 @@ Copyright (c) 2023 - Present, Designed & Developed by [Themefisher](https://them
 Besides developing beautifully designed and blazing-fast themes, we help businesses create fast, performance-focused, scalable & secure websites based on NextJs, Hugo, Astro, etc.
 
 If you need a custom theme, theme customization, or complete website development services from scratch you can [Hire Us](https://themefisher.com/contact).
+
+..........................
+
+Template name Bookworm Light Astro by [Themefisher](https://themefisher.com)
+
+# Running it
+
+npm run dev
+
+# TODO
+- Include contact me submission action
+- Get a transparent version of logo for dark mode
+- Include google analytics 

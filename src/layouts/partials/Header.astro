@@ -1,7 +1,7 @@
 ---
 import Logo from "@/components/Logo.astro";
 import menu from "@/config/menu.json";
-import { IoSearch } from "react-icons/io5";
+import { IoMoon, IoSearch, IoSunny } from "react-icons/io5";
 
 export interface ChildNavigationLink {
   name: string;
@@ -87,6 +87,16 @@ const { main }: { main: NavigationLink[] } = menu;
       }
     </ul>
     <div class="order-1 ml-auto flex md:order-2 md:ml-0">
+      <button
+        id="theme-toggle"
+        type="button"
+        class="mr-4 inline-block cursor-pointer p-2 text-xl text-dark transition hover:text-primary md:mr-0"
+        title="Toggle dark mode"
+        aria-label="Toggle dark mode"
+      >
+        <IoSunny className="hidden dark:block" />
+        <IoMoon className="block dark:hidden" />
+      </button>
       <a
         class="mr-4 inline-block cursor-pointer p-2 text-xl text-dark transition hover:text-primary md:mr-0"
         href="/search"
@@ -98,3 +108,18 @@ const { main }: { main: NavigationLink[] } = menu;
     </div>
   </nav>
 </header>
+
+<script is:inline>
+  (function () {
+    // Delegated on document (which persists across ClientRouter swaps)
+    // instead of the button itself, and guarded so the listener is only
+    // ever attached once, even though this script re-runs on navigation.
+    if (window.__themeToggleBound) return;
+    window.__themeToggleBound = true;
+    document.addEventListener("click", function (e) {
+      if (!e.target.closest("#theme-toggle")) return;
+      var isDark = document.documentElement.classList.toggle("dark");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    });
+  })();
+</script>

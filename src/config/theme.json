@@ -6,12 +6,28 @@
         "body": "#fff",
         "border": "#D5D5D5",
         "light": "#FAFAFA",
-        "dark": "#152035"
+        "dark": "#152035",
+        "footer": "#152035"
       },
       "text_color": {
         "text": "#747577",
         "text-dark": "#152035",
         "text-light": "#a1a5ae"
+      }
+    },
+    "darkmode": {
+      "theme_color": {
+        "primary": "#01AD9F",
+        "body": "#0B0F19",
+        "border": "#242C3D",
+        "light": "#141B29",
+        "dark": "#F5F6F8",
+        "footer": "#05070C"
+      },
+      "text_color": {
+        "text": "#A0A6B4",
+        "text-dark": "#F5F6F8",
+        "text-light": "#6C7280"
       }
     }
   },
