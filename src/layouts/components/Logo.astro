@@ -4,31 +4,63 @@ import config from "@/config/config.json";
 const { src } = Astro.props;
 const {
   logo,
+  logo_dark,
   logo_width,
   logo_height,
   logo_text,
   title,
 }: {
   logo: string;
+  logo_dark?: string;
   logo_width: any;
   logo_height: any;
   logo_text: string;
   title: string;
 } = config.site;
+
+const sizeStyle = {
+  height: logo_height.replace("px", "") + "px",
+  width: logo_width.replace("px", "") + "px",
+  objectFit: "contain" as const,
+};
 ---
 
 <a href="/" class="navbar-brand block">
   {
-    src || logo ? (
+    src ? (
       <Image
         width={logo_width.replace("px", "") * 2}
         height={logo_height.replace("px", "") * 2}
-        src={src ? src : logo}
+        src={src}
         alt={title}
-        style={{
-          height: logo_height.replace("px", "") + "px",
-          width: logo_width.replace("px", "") + "px",
-        }}
+        style={sizeStyle}
+      />
+    ) : logo && logo_dark ? (
+      <>
+        <Image
+          width={logo_width.replace("px", "") * 2}
+          height={logo_height.replace("px", "") * 2}
+          src={logo}
+          alt={title}
+          class="block dark:hidden"
+          style={sizeStyle}
+        />
+        <Image
+          width={logo_width.replace("px", "") * 2}
+          height={logo_height.replace("px", "") * 2}
+          src={logo_dark}
+          alt={title}
+          class="hidden dark:block"
+          style={sizeStyle}
+        />
+      </>
+    ) : logo ? (
+      <Image
+        width={logo_width.replace("px", "") * 2}
+        height={logo_height.replace("px", "") * 2}
+        src={logo}
+        alt={title}
+        style={sizeStyle}
       />
     ) : logo_text ? (
       logo_text
