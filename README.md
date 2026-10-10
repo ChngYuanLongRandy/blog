@@ -123,6 +123,9 @@ Template name Bookworm Light Astro by [Themefisher](https://themefisher.com)
 
 npm run dev
 
+# Requsites
+- Resend account for the submit function to work
+
 # TODO
 - Include contact me submission action
 - Get a transparent version of logo for dark mode
