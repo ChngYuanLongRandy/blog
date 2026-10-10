@@ -24,6 +24,12 @@ export const POST: APIRoute = async ({ request, redirect }) => {
     return redirect("/contact?status=error");
   }
 
+  // Resend rejects addresses without a dotted domain (e.g. "me@localhost"),
+  // which browsers' type="email" check still allows.
+  if (!/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(email)) {
+    return redirect("/contact?status=invalid-email");
+  }
+
   const apiKey = import.meta.env.RESEND_API_KEY;
   if (!apiKey) {
     console.error("RESEND_API_KEY is not set");

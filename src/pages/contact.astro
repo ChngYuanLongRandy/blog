@@ -63,6 +63,14 @@ const status = Astro.url.searchParams.get("status");
             )
           }
           {
+            status === "invalid-email" && (
+              <p class="col-12 mb-4 rounded-lg bg-red-600/10 px-4 py-3 text-red-600">
+                That email address doesn't look valid. Please check it and
+                try again.
+              </p>
+            )
+          }
+          {
             status === "error" && (
               <p class="col-12 mb-4 rounded-lg bg-red-600/10 px-4 py-3 text-red-600">
                 Something went wrong sending your message. Please try again
