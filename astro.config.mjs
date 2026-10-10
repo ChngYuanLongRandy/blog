@@ -57,7 +57,20 @@ export default defineConfig({
   // Site stays statically pre-rendered; the adapter just enables the one
   // on-demand route (src/pages/api/contact.ts, which sets prerender=false)
   // to run as a Vercel serverless function.
-  adapter: vercel(),
+  //
+  // includeFiles: Vite 8 depends on Rolldown's native binary at runtime, but
+  // @vercel/nft's static file tracer doesn't reliably detect the binding
+  // since it's loaded via a dynamic, platform-conditional require(). Without
+  // this, the deployed function 500s with "Cannot find native binding" the
+  // moment any code path touches Vite internals. Forced in explicitly here;
+  // the file itself comes from the "@rolldown/binding-linux-x64-gnu" direct
+  // dependency + pnpm.supportedArchitectures in package.json (needed so the
+  // Linux-only binary is actually downloaded even from a non-Linux machine).
+  adapter: vercel({
+    includeFiles: [
+      "./node_modules/@rolldown/binding-linux-x64-gnu/rolldown-binding.linux-x64-gnu.node",
+    ],
+  }),
   integrations: [
     react(),
     sitemap(),
