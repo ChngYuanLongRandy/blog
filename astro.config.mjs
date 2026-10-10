@@ -63,12 +63,16 @@ export default defineConfig({
   // since it's loaded via a dynamic, platform-conditional require(). Without
   // this, the deployed function 500s with "Cannot find native binding" the
   // moment any code path touches Vite internals. Forced in explicitly here;
-  // the file itself comes from the "@rolldown/binding-linux-x64-gnu" direct
+  // the files come from the "@rolldown/binding-linux-x64-gnu" direct
   // dependency + pnpm.supportedArchitectures in package.json (needed so the
   // Linux-only binary is actually downloaded even from a non-Linux machine).
+  // Both the .node binary AND its package.json must be included: rolldown's
+  // loader does `require("@rolldown/binding-linux-x64-gnu")`, a real package
+  // resolution that needs the manifest present, not just the binary file.
   adapter: vercel({
     includeFiles: [
       "./node_modules/@rolldown/binding-linux-x64-gnu/rolldown-binding.linux-x64-gnu.node",
+      "./node_modules/@rolldown/binding-linux-x64-gnu/package.json",
     ],
   }),
   integrations: [
