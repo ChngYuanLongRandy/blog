@@ -10,6 +10,28 @@ import { defineConfig, fontProviders, sharpImageService } from "astro/config";
 import config from "./src/config/config.json";
 import theme from "./src/config/theme.json";
 
+// @astrojs/vercel's runtime entrypoint imports constants from its index.js,
+// which also imports `rolldown` (only used at build time, for Edge
+// Middleware bundling, which this site doesn't use). Vite 8 keeps that unused
+// import as a bare `import "rolldown"` at the top of the deployed function,
+// so the real package loads at startup and crashes on Vercel with "Cannot
+// find native binding". Resolving it to an empty stub removes it from the
+// bundle. Build-only, so dev and the adapter's own build-time code (which
+// runs in plain Node, not through Vite) are unaffected.
+const stubRolldownInBundle = {
+  name: "stub-rolldown-in-bundle",
+  apply: "build",
+  enforce: "pre",
+  resolveId(id) {
+    if (id === "rolldown") return "\0rolldown-stub";
+  },
+  load(id) {
+    if (id === "\0rolldown-stub") {
+      return 'export const rolldown = () => { throw new Error("rolldown is not available at runtime"); };';
+    }
+  },
+};
+
 // Helper to parse font string format: "FontName:wght@400;500;600;700"
 function parseFontString(fontStr) {
   const [name, weightPart] = fontStr.split(":");
@@ -52,29 +74,12 @@ export default defineConfig({
   base: config.site.base_path ? config.site.base_path : "/",
   trailingSlash: config.site.trailing_slash ? "always" : "never",
   image: { service: sharpImageService() },
-  vite: { plugins: [tailwindcss()] },
+  vite: { plugins: [tailwindcss(), stubRolldownInBundle] },
   fonts: fontsConfig,
   // Site stays statically pre-rendered; the adapter just enables the one
   // on-demand route (src/pages/api/contact.ts, which sets prerender=false)
   // to run as a Vercel serverless function.
-  //
-  // includeFiles: Vite 8 depends on Rolldown's native binary at runtime, but
-  // @vercel/nft's static file tracer doesn't reliably detect the binding
-  // since it's loaded via a dynamic, platform-conditional require(). Without
-  // this, the deployed function 500s with "Cannot find native binding" the
-  // moment any code path touches Vite internals. Forced in explicitly here;
-  // the files come from the "@rolldown/binding-linux-x64-gnu" direct
-  // dependency + pnpm.supportedArchitectures in package.json (needed so the
-  // Linux-only binary is actually downloaded even from a non-Linux machine).
-  // Both the .node binary AND its package.json must be included: rolldown's
-  // loader does `require("@rolldown/binding-linux-x64-gnu")`, a real package
-  // resolution that needs the manifest present, not just the binary file.
-  adapter: vercel({
-    includeFiles: [
-      "./node_modules/@rolldown/binding-linux-x64-gnu/rolldown-binding.linux-x64-gnu.node",
-      "./node_modules/@rolldown/binding-linux-x64-gnu/package.json",
-    ],
-  }),
+  adapter: vercel(),
   integrations: [
     react(),
     sitemap(),
