@@ -2,6 +2,7 @@ import { unified } from "@astrojs/markdown-remark";
 import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
+import vercel from "@astrojs/vercel";
 import tailwindcss from "@tailwindcss/vite";
 import AutoImport from "astro-auto-import";
 import gtm from "astro-gtm-lite";
@@ -53,6 +54,10 @@ export default defineConfig({
   image: { service: sharpImageService() },
   vite: { plugins: [tailwindcss()] },
   fonts: fontsConfig,
+  // Site stays statically pre-rendered; the adapter just enables the one
+  // on-demand route (src/pages/api/contact.ts, which sets prerender=false)
+  // to run as a Vercel serverless function.
+  adapter: vercel(),
   integrations: [
     react(),
     sitemap(),

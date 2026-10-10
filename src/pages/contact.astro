@@ -10,9 +10,9 @@ const entry = (await getEntry(
   "contact",
   "-index"
 )) as CollectionEntry<"contact">;
-const { contact_form_action } = config.params;
 const { address, email, phone } = config.contactinfo;
 const { title, description, meta_title, image } = entry.data;
+const status = Astro.url.searchParams.get("status");
 ---
 
 <Base
@@ -55,11 +55,35 @@ const { title, description, meta_title, image } = entry.data;
           </ul>
         </div>
         <div class="sm:col-7 md:col-8">
+          {
+            status === "success" && (
+              <p class="col-12 mb-4 rounded-lg bg-primary/10 px-4 py-3 text-primary">
+                Thanks for reaching out! Your message has been sent.
+              </p>
+            )
+          }
+          {
+            status === "error" && (
+              <p class="col-12 mb-4 rounded-lg bg-red-600/10 px-4 py-3 text-red-600">
+                Something went wrong sending your message. Please try again
+                or email {email} directly.
+              </p>
+            )
+          }
           <form
             class="contact-form row gy-2 justify-center"
             method="POST"
-            action={contact_form_action}
+            action="/api/contact"
           >
+            {/* honeypot: hidden from real visitors, bots often fill it in */}
+            <input
+              type="text"
+              name="company"
+              tabindex="-1"
+              autocomplete="off"
+              class="absolute left-[-9999px]"
+              aria-hidden="true"
+            />
             <div class="lg:col-6">
               <label class="mb-2 block" for="name"
                 >Name <span class="text-red-600">*</span></label
@@ -90,7 +114,12 @@ const { title, description, meta_title, image } = entry.data;
               <label class="mb-2 block" for="message"
                 >Message <span class="text-red-600">*</span></label
               >
-              <textarea class="form-textarea w-full" rows="4"></textarea>
+              <textarea
+                class="form-textarea w-full"
+                name="message"
+                rows="4"
+                required
+              />
             </div>
             <div class="col-12">
               <button class="btn btn-primary mt-2">Submit Now</button>

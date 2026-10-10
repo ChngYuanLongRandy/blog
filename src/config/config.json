@@ -1,13 +1,14 @@
 {
   "site": {
-    "title": "Bookworm Light Astro | Blog Template",
+    "title": "Just an Ordinary Singaporean Dad",
     "base_url": "https://bookworm-light-astro.vercel.app",
     "base_path": "/",
     "trailing_slash": false,
     "favicon": "/images/favicon.png",
-    "logo": "/images/logo.png",
+    "logo": "/images/logo-light-mode.png",
+    "logo_dark": "/images/logo-dark-mode.png",
     "logo_width": "200",
-    "logo_height": "200",
+    "logo_height": "89",
     "logo_text": "Randy Chng"
   },
 
@@ -18,7 +19,7 @@
   "metadata": {
     "meta_author": "Themefisher",
     "meta_image": "/images/og-image.png",
-    "meta_description": "Bookworm Light Astro Blog Template"
+    "meta_description": "Just an Ordinary Singaporean Dad"
   },
 
   "google_tag_manager": {
@@ -27,7 +28,8 @@
   },
 
   "params": {
-    "contact_form_action": "#",
+    "contact_form_action": "https://api.web3forms.com/submit",
+    "web3forms_access_key": "KEYHERE",
     "copyright": "Copyright © 2026 a theme by [Themefisher](https://themefisher.com)"
   },
 
