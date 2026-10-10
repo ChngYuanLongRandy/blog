@@ -12,7 +12,6 @@ const entry = (await getEntry(
 )) as CollectionEntry<"contact">;
 const { address, email, phone } = config.contactinfo;
 const { title, description, meta_title, image } = entry.data;
-const status = Astro.url.searchParams.get("status");
 ---
 
 <Base
@@ -55,29 +54,6 @@ const status = Astro.url.searchParams.get("status");
           </ul>
         </div>
         <div class="sm:col-7 md:col-8">
-          {
-            status === "success" && (
-              <p class="col-12 mb-4 rounded-lg bg-primary/10 px-4 py-3 text-primary">
-                Thanks for reaching out! Your message has been sent.
-              </p>
-            )
-          }
-          {
-            status === "invalid-email" && (
-              <p class="col-12 mb-4 rounded-lg bg-red-600/10 px-4 py-3 text-red-600">
-                That email address doesn't look valid. Please check it and
-                try again.
-              </p>
-            )
-          }
-          {
-            status === "error" && (
-              <p class="col-12 mb-4 rounded-lg bg-red-600/10 px-4 py-3 text-red-600">
-                Something went wrong sending your message. Please try again
-                or email {email} directly.
-              </p>
-            )
-          }
           <form
             class="contact-form row gy-2 justify-center"
             method="POST"
@@ -137,4 +113,100 @@ const status = Astro.url.searchParams.get("status");
       </div>
     </div>
   </section>
+
+  <dialog
+    id="contact-modal"
+    class="m-auto w-[90%] max-w-md rounded-lg border border-border bg-body p-8 text-center text-text backdrop:bg-black/60"
+  >
+    <h3 id="contact-modal-title" class="mb-4"></h3>
+    <p id="contact-modal-text" class="mb-6"></p>
+    <form method="dialog">
+      <button class="btn btn-primary">Close</button>
+    </form>
+  </dialog>
 </Base>
+
+<script is:inline define:vars={{ contactEmail: email }}>
+  // The page is prerendered, so the result can't be rendered server-side from
+  // ?status=. The form is submitted with fetch so the visitor stays on the
+  // page (and keeps their typed message if it fails); the redirect target's
+  // ?status= is read from the final response URL. The ?status= check on load
+  // covers a plain (non-JS) form POST that lands back here.
+  (function () {
+    var messages = {
+      success: {
+        title: "Message sent",
+        text: "Thanks for reaching out! I'll get back to you soon.",
+        ok: true,
+      },
+      "invalid-email": {
+        title: "Check your email address",
+        text: "That email address doesn't look valid. Please check it and try again.",
+        ok: false,
+      },
+      error: {
+        title: "Something went wrong",
+        text:
+          "Your message couldn't be sent. Please try again, or email " +
+          contactEmail +
+          " directly.",
+        ok: false,
+      },
+    };
+
+    function init() {
+      var form = document.querySelector("form.contact-form");
+      var modal = document.getElementById("contact-modal");
+      if (!form || !modal) return;
+
+      function show(status) {
+        var m = messages[status] || messages.error;
+        var title = document.getElementById("contact-modal-title");
+        title.textContent = m.title;
+        title.classList.toggle("text-primary", m.ok);
+        title.classList.toggle("text-red-600", !m.ok);
+        document.getElementById("contact-modal-text").textContent = m.text;
+        if (!modal.open) modal.showModal();
+      }
+
+      // Clicking the dimmed backdrop closes the modal too.
+      modal.addEventListener("click", function (e) {
+        if (e.target === modal) modal.close();
+      });
+
+      var fromRedirect = new URLSearchParams(location.search).get("status");
+      if (fromRedirect) {
+        show(fromRedirect);
+        history.replaceState(null, "", location.pathname);
+      }
+
+      // View transitions re-run this on every navigation; bind only once per form.
+      if (form.dataset.bound) return;
+      form.dataset.bound = "1";
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var button = form.querySelector("button[type=submit], button:not([type])");
+        if (button) button.disabled = true;
+
+        fetch(form.action, { method: "POST", body: new FormData(form) })
+          .then(function (res) {
+            var status = new URL(res.url).searchParams.get("status");
+            if (status === "success") form.reset();
+            show(status || "error");
+          })
+          .catch(function () {
+            show("error");
+          })
+          .finally(function () {
+            if (button) button.disabled = false;
+          });
+      });
+    }
+
+    // Inline scripts re-run on view-transition navigations; register once.
+    if (window.__contactModalBound) return;
+    window.__contactModalBound = true;
+    document.addEventListener("astro:page-load", init);
+  })();
+</script>
