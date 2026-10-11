@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "Just an Ordinary Singaporean Dad",
-    "base_url": "https://bookworm-light-astro.vercel.app",
+    "base_url": "https://randychng.com",
     "base_path": "/",
     "trailing_slash": false,
     "favicon": "/images/favicon.png",
@@ -17,7 +17,7 @@
   },
 
   "metadata": {
-    "meta_author": "Themefisher",
+    "meta_author": "Randy Chng",
     "meta_image": "/images/og-image.png",
     "meta_description": "Just an Ordinary Singaporean Dad"
   },

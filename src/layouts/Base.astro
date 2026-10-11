@@ -22,11 +22,56 @@ export interface Props {
   image?: string;
   noindex?: boolean;
   canonical?: string;
+  type?: "website" | "article";
+  date?: Date;
 }
 
 // distructure frontmatters
-const { title, meta_title, description, image, noindex, canonical } =
-  Astro.props;
+const {
+  title,
+  meta_title,
+  description,
+  image,
+  noindex,
+  canonical,
+  type = "website",
+  date,
+} = Astro.props;
+
+// SEO values shared by the canonical link, Open Graph, Twitter and JSON-LD
+const siteUrl = config.site.base_url.replace(/\/$/, "");
+const pageTitle = plainify(
+  meta_title ? meta_title : title ? title : config.site.title,
+).trim();
+const pageDescription = plainify(
+  description ? description : config.metadata.meta_description,
+).trim();
+const canonicalUrl =
+  canonical ?? `${siteUrl}${Astro.url.pathname.replace(/\/$/, "")}`;
+const imagePath = image ? image : config.metadata.meta_image;
+const imageUrl = imagePath.startsWith("http")
+  ? imagePath
+  : `${siteUrl}${imagePath}`;
+
+const jsonLd =
+  type === "article"
+    ? {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        headline: pageTitle,
+        description: pageDescription,
+        image: imageUrl,
+        datePublished: date?.toISOString(),
+        author: { "@type": "Person", name: config.metadata.meta_author },
+        mainEntityOfPage: canonicalUrl,
+      }
+    : {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        name: config.site.title,
+        url: siteUrl,
+        author: { "@type": "Person", name: config.metadata.meta_author },
+      };
 ---
 
 <!doctype html>
@@ -77,82 +122,48 @@ const { title, meta_title, description, image, noindex, canonical } =
     />
 
     <!-- title -->
-    <title>
-      {plainify(meta_title ? meta_title : title ? title : config.site.title)}
-    </title>
+    <title>{pageTitle}</title>
 
-    <!-- canonical url -->
-    {canonical && <link rel="canonical" href={canonical} item-prop="url" />}
+    <!-- canonical url (always set, so duplicates like vercel.app preview
+         domains point search engines at the real site) -->
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- sitemap -->
+    <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- noindex robots -->
     {noindex && <meta name="robots" content="noindex,nofollow" />}
 
     <!-- meta-description -->
-    <meta
-      name="description"
-      content={plainify(
-        description ? description : config.metadata.meta_description,
-      )}
-    />
+    <meta name="description" content={pageDescription} />
 
     <ClientRouter />
 
     <!-- author from config.json -->
     <meta name="author" content={config.metadata.meta_author} />
 
-    <!-- og-title -->
-    <meta
-      property="og:title"
-      content={plainify(
-        meta_title ? meta_title : title ? title : config.site.title,
-      )}
-    />
+    <!-- open graph -->
+    <meta property="og:site_name" content={config.site.title} />
+    <meta property="og:locale" content="en_SG" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={imageUrl} />
+    {
+      type === "article" && date && (
+        <meta property="article:published_time" content={date.toISOString()} />
+      )
+    }
 
-    <!-- og-description -->
-    <meta
-      property="og:description"
-      content={plainify(
-        description ? description : config.metadata.meta_description,
-      )}
-    />
-    <meta property="og:type" content="website" />
-    <meta
-      property="og:url"
-      content={`${config.site.base_url}/${Astro.url.pathname.replace("/", "")}`}
-    />
-
-    <!-- twitter-title -->
-    <meta
-      name="twitter:title"
-      content={plainify(
-        meta_title ? meta_title : title ? title : config.site.title,
-      )}
-    />
-
-    <!-- twitter-description -->
-    <meta
-      name="twitter:description"
-      content={plainify(
-        description ? description : config.metadata.meta_description,
-      )}
-    />
-
-    <!-- og-image -->
-    <meta
-      property="og:image"
-      content={`${config.site.base_url}${
-        image ? image : config.metadata.meta_image
-      }`}
-    />
-
-    <!-- twitter-image -->
-    <meta
-      name="twitter:image"
-      content={`${config.site.base_url}${
-        image ? image : config.metadata.meta_image
-      }`}
-    />
+    <!-- twitter -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={imageUrl} />
+
+    <!-- structured data -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
     <TwSizeIndicator />
