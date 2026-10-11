@@ -89,6 +89,30 @@ const jsonLd =
         document.addEventListener("astro:after-swap", applyTheme);
       })();
     </script>
+    <!-- Google Analytics (GA4): production only, so local dev doesn't pollute
+         the stats. Navigation page views come from GA4's history tracking. -->
+    {
+      import.meta.env.PROD && config.google_analytics.measurement_id && (
+        <>
+          <script
+            is:inline
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${config.google_analytics.measurement_id}`}
+          />
+          <script
+            is:inline
+            define:vars={{ id: config.google_analytics.measurement_id }}
+          >
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+              dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+            gtag("config", id);
+          </script>
+        </>
+      )
+    }
     <!-- favicon -->
     <link rel="shortcut icon" href={config.site.favicon} />
     <!-- theme meta -->

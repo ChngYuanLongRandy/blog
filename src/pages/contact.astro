@@ -192,7 +192,10 @@ const { title, description, meta_title, image } = entry.data;
         fetch(form.action, { method: "POST", body: new FormData(form) })
           .then(function (res) {
             var status = new URL(res.url).searchParams.get("status");
-            if (status === "success") form.reset();
+            if (status === "success") {
+              form.reset();
+              if (window.gtag) window.gtag("event", "generate_lead");
+            }
             show(status || "error");
           })
           .catch(function () {

@@ -22,8 +22,12 @@
     "meta_description": "Just an Ordinary Singaporean Dad"
   },
 
+  "google_analytics": {
+    "measurement_id": "G-3LQ7CTFS70"
+  },
+
   "google_tag_manager": {
-    "enable": true,
+    "enable": false,
     "gtm_id": "GTM-XXXXXX"
   },
 
